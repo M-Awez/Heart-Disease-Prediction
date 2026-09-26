@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About | Heart Disease Predictor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+    :root {
+        --red: #c0202e;
+        --red-dark: #9d1a26;
+        --ink: #1f2430;
+        --muted: #7a8194;
+        --border: #e7e9ee;
+        --bg: #f6f7fb;
+        --card: #ffffff;
+        --green-bg: #edfaf1;
+        --green-text: #1a7d43;
+        --green-border: #b9ecc9;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+        font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+        background: var(--bg);
+        min-height: 100vh;
+        margin: 0;
+        color: var(--ink);
+        padding: 28px 16px 44px;
+        overflow-x: hidden;
+        position: relative;
+    }
+    .blob {
+        position: fixed;
+        border-radius: 50%;
+        filter: blur(60px);
+        opacity: 0.35;
+        z-index: 0;
+        pointer-events: none;
+        animation: float 14s ease-in-out infinite;
+    }
+    .blob.one { width: 320px; height: 320px; background: #fca5ac; top: -80px; left: -100px; animation-duration: 16s; }
+    .blob.two { width: 260px; height: 260px; background: #ffd9a0; bottom: -60px; right: -80px; animation-duration: 19s; animation-delay: 2s; }
+    .blob.three { width: 200px; height: 200px; background: #c8e6ff; top: 40%; right: 10%; animation-duration: 13s; animation-delay: 1s; }
+    @keyframes float {
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        33% { transform: translate(20px, -25px) scale(1.08); }
+        66% { transform: translate(-15px, 15px) scale(0.95); }
+    }
+
+    .page-wrap {
+        max-width: 1100px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        z-index: 1;
+    }
+    .topbar {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 22px;
+        opacity: 0;
+        animation: fadeDown 0.6s ease forwards;
+    }
+    .topbar img.logo { height: 100px; border-radius: 8px; }
+
+    .card {
+        position: relative;
+        background: var(--card);
+        border-radius: 20px;
+        padding: 40px 38px 36px;
+        width: 100%;
+        box-shadow: 0 1px 2px rgba(16,24,40,0.04), 0 12px 28px rgba(16,24,40,0.08);
+        border: 1px solid var(--border);
+        opacity: 0;
+        transform: translateY(24px);
+        animation: fadeUp 0.7s 0.15s cubic-bezier(.22,1,.36,1) forwards;
+    }
+
+    .top-actions {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        display: flex;
+        gap: 10px;
+        z-index: 2;
+    }
+    a.icon-link, a.back-link {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        height: 40px;
+        padding: 0 14px;
+        border-radius: 10px;
+        background: #fff;
+        border: 1px solid var(--border);
+        color: var(--ink);
+        text-decoration: none;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 600;
+        font-size: 13.5px;
+        transition: all 0.3s cubic-bezier(.34,1.56,.64,1);
+    }
+    a.icon-link { padding: 0; width: 40px; justify-content: center; }
+    a.icon-link svg { width: 20px; height: 20px; }
+    a.back-link svg { width: 16px; height: 16px; }
+    a.icon-link:hover, a.back-link:hover {
+        background: var(--ink);
+        color: #fff;
+        transform: translateY(-3px);
+        box-shadow: 0 10px 18px rgba(0,0,0,0.18);
+    }
+
+    .heading-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        justify-content: center;
+        margin-bottom: 4px;
+    }
+    .heart-badge {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, var(--red), var(--red-dark));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        box-shadow: 0 6px 14px rgba(192,32,46,0.28);
+    }
+    .heart-badge svg {
+        width: 22px; height: 22px; fill: #fff;
+        animation: heartbeat 1.8s ease-in-out infinite;
+        transform-origin: center;
+    }
+    @keyframes heartbeat {
+        0%, 100% { transform: scale(1); }
+        15% { transform: scale(1.22); }
+        30% { transform: scale(0.96); }
+        45% { transform: scale(1.14); }
+        60% { transform: scale(1); }
+    }
+
+    h1 {
+        font-family: 'Poppins', sans-serif;
+        text-align: center;
+        margin: 0;
+        font-size: 23px;
+        font-weight: 600;
+    }
+    p.subtitle {
+        text-align: center;
+        color: var(--muted);
+        margin-top: 6px;
+        margin-bottom: 30px;
+        font-size: 14px;
+    }
+
+    section { margin-bottom: 28px; }
+    section:last-of-type { margin-bottom: 0; }
+    h2 {
+        font-family: 'Poppins', sans-serif;
+        font-size: 16.5px;
+        font-weight: 600;
+        margin: 0 0 10px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    h2::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--red);
+        flex-shrink: 0;
+    }
+    section p, section li {
+        font-size: 14px;
+        line-height: 1.7;
+        color: var(--muted);
+        margin: 0 0 10px;
+    }
+    section ul { padding-left: 20px; margin: 0 0 4px; }
+    section li { margin-bottom: 7px; }
+    strong { color: var(--ink); }
+
+    .model-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 6px 0 4px;
+        font-size: 13.5px;
+        overflow: hidden;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+    }
+    .model-table th, .model-table td {
+        padding: 10px 14px;
+        text-align: left;
+        border-bottom: 1px solid var(--border);
+    }
+    .model-table th {
+        background: #fbfbfd;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 600;
+        color: var(--ink);
+        font-size: 12.5px;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+    }
+    .model-table tr:last-child td { border-bottom: none; }
+    .model-table td.metric { color: var(--muted); }
+    .model-table tr.winner td { background: var(--green-bg); }
+    .model-table tr.winner td.metric { color: var(--green-text); font-weight: 700; }
+    .badge {
+        display: inline-block;
+        font-size: 10.5px;
+        font-weight: 700;
+        padding: 2px 8px;
+        border-radius: 999px;
+        background: var(--green-bg);
+        color: var(--green-text);
+        border: 1px solid var(--green-border);
+        margin-left: 6px;
+        vertical-align: middle;
+    }
+
+    .pipeline-steps {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+        margin-top: 8px;
+    }
+    .pipeline-step {
+        background: #fbfbfd;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 14px 12px;
+        text-align: center;
+    }
+    .pipeline-step .num {
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--red), var(--red-dark));
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 600;
+        font-size: 12.5px;
+        margin: 0 auto 8px;
+    }
+    .pipeline-step .label {
+        font-size: 12.5px;
+        font-weight: 600;
+        color: var(--ink);
+        line-height: 1.4;
+    }
+
+    .feature-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 6px;
+    }
+    .feature-tags span {
+        background: #fbfbfd;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        padding: 6px 13px;
+        font-size: 12.5px;
+        color: var(--ink);
+        font-weight: 500;
+    }
+
+    .disclaimer {
+        background: #fff7e6;
+        color: #92600e;
+        border: 1px solid #fbdf9d;
+        border-radius: 12px;
+        padding: 14px 16px;
+        font-size: 13px;
+        line-height: 1.6;
+        margin-top: 4px;
+    }
+
+    .cta-btn {
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin-top: 6px;
+        padding: 13px;
+        background: linear-gradient(135deg, var(--red), var(--red-dark));
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        font-size: 15.5px;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 600;
+        text-decoration: none;
+        box-shadow: 0 8px 16px rgba(192,32,46,0.25);
+        transition: filter 0.2s, transform 0.15s, box-shadow 0.3s;
+    }
+    .cta-btn:hover {
+        filter: brightness(1.06);
+        transform: translateY(-2px);
+        box-shadow: 0 12px 22px rgba(192,32,46,0.34);
+    }
+
+    .author {
+        text-align: center;
+        color: var(--muted);
+        font-size: 13px;
+        margin-top: 22px;
+        opacity: 0;
+        animation: fadeUp 0.6s 0.8s ease forwards;
+    }
+    .author span { color: var(--ink); font-weight: 600; }
+
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0) scale(1); } }
+    @keyframes fadeDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 620px) {
+        .card { padding: 30px 22px; }
+        .pipeline-steps { grid-template-columns: 1fr 1fr; }
+        .top-actions { position: static; justify-content: flex-end; margin-bottom: 16px; }
+        .model-table { font-size: 12.5px; }
+        .model-table th, .model-table td { padding: 8px 10px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+            animation-duration: 0.001ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.001ms !important;
+        }
+    }
+</style>
+</head>
+<body>
+    <div class="blob one"></div>
+    <div class="blob two"></div>
+    <div class="blob three"></div>
+
+  <div class="page-wrap">
+
+    <div class="topbar">
+        <img class="logo" src="{{ url_for('static', filename='vt_logo.png') }}" alt="Vihara Tech logo">
+    </div>
+
+    <div class="card">
+        <div class="top-actions">
+            <a class="back-link" href="/">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                Predictor
+            </a>
+            <a class="icon-link" href="https://github.com/awez/awez" target="_blank" rel="noopener noreferrer" title="View project on GitHub">
+                <svg viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
+                    0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13
+                    -.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07
+                    -1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21
+                    2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12
+                    .51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48
+                    0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                </svg>
+            </a>
+        </div>
+
+        <div class="heading-row">
+            <div class="heart-badge">
+                <svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-10-9.1C.4 8.6 2 5 5.6 5c2 0 3.4 1.1 4.4 2.5C11 6.1 12.4 5 14.4 5 18 5 19.6 8.6 22 11.9 19.5 16.4 12 21 12 21z"/></svg>
+            </div>
+            <h1>About This Project</h1>
+        </div>
+        <p class="subtitle">The story, the data, and the model behind the Heart Disease Predictor</p>
+
+        <section>
+            <h2>What it does</h2>
+            <p>
+                The Heart Disease Predictor is a machine learning web app that estimates a
+                patient's likelihood of having heart disease from seven clinical indicators:
+                age, sex, chest pain type, maximum heart rate achieved, ST depression (oldpeak),
+                ST slope, and thalassemia status. Enter the values on the predictor page and the
+                trained model returns a risk result along with a confidence score.
+            </p>
+            <div class="feature-tags">
+                <span>Age</span><span>Sex</span><span>Chest Pain Type</span>
+                <span>Max Heart Rate</span><span>ST Depression</span>
+                <span>ST Slope</span><span>Thalassemia</span>
+            </div>
+        </section>
+
+        <section>
+            <h2>Building and comparing the models</h2>
+            <p>
+                Rather than committing to a single algorithm up front, this project trained
+                and evaluated several classic classification models on the same clinical
+                dataset to see which one generalized best: Logistic Regression, K-Nearest
+                Neighbors, Support Vector Machine, Decision Tree, Random Forest, and
+                Gaussian Naive Bayes. Each model was trained on the same train/test split
+                and scored on accuracy so the comparison stayed fair.
+            </p>
+            <p>
+                Somewhat surprisingly, the simplest model in the lineup, <strong>Gaussian
+                Naive Bayes</strong>, came out ahead of the more complex ensemble and
+                margin-based models, reaching roughly <strong>80% accuracy</strong> right out
+                of the box. That result made sense on reflection: Naive Bayes tends to do
+                well on smaller clinical datasets with roughly independent numeric features,
+                which is a close match for this dataset's shape.
+            </p>
+            <table class="model-table">
+                <thead>
+                    <tr><th>Model</th><th>Result</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Logistic Regression</td><td class="metric">Solid baseline, slightly below Naive Bayes</td></tr>
+                    <tr><td>K-Nearest Neighbors</td><td class="metric">Sensitive to feature scaling and k</td></tr>
+                    <tr><td>Support Vector Machine</td><td class="metric">Competitive, more expensive to tune</td></tr>
+                    <tr><td>Decision Tree</td><td class="metric">Prone to overfitting on this dataset size</td></tr>
+                    <tr><td>Random Forest</td><td class="metric">Stable but no better than the simpler models here</td></tr>
+                    <tr class="winner"><td>Gaussian Naive Bayes</td><td class="metric">~80% accuracy <span class="badge">Best base model</span></td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2>Squeezing out more performance with hyperparameter tuning</h2>
+            <p>
+                Once Naive Bayes was chosen as the strongest candidate, the next step was to
+                stop using its default settings and actually tune it. A grid search was run
+                over the model's smoothing parameter (<code>var_smoothing</code>) using
+                cross-validation, testing a range of values on a logarithmic scale to find
+                the setting that best balanced bias and variance for this dataset.
+            </p>
+            <p>
+                The search compared each candidate configuration on held-out folds rather
+                than the training data alone, so the selected parameters reflect what
+                actually generalizes, not just what fits the training set. The best-performing
+                configuration from that search is the one currently powering the live
+                predictions on this app.
+            </p>
+            <div class="pipeline-steps">
+                <div class="pipeline-step"><div class="num">1</div><div class="label">Clean &amp; prepare data</div></div>
+                <div class="pipeline-step"><div class="num">2</div><div class="label">Train &amp; compare models</div></div>
+                <div class="pipeline-step"><div class="num">3</div><div class="label">Tune best model</div></div>
+                <div class="pipeline-step"><div class="num">4</div><div class="label">Deploy &amp; serve</div></div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Tech stack</h2>
+            <ul>
+                <li><strong>Python</strong> with scikit-learn for model training, evaluation, and hyperparameter search</li>
+                <li><strong>Flask</strong> to serve the trained model behind a simple web form</li>
+                <li><strong>HTML/CSS/JS</strong> for the interface you're using right now</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>About the author</h2>
+            <p>
+                Built by <strong>Mohammed Awez</strong> as a data science project at
+                <strong>Vihara Tech</strong>, exploring how far classic machine learning
+                models can go on real clinical data — and how much of that performance
+                comes down to careful comparison and tuning rather than picking the
+                fanciest algorithm.
+            </p>
+        </section>
+
+        <div class="disclaimer">
+            ⚠️ For educational purposes only. This tool is not a medical device and
+            is not a substitute for professional diagnosis — always consult a doctor
+            for any real health concerns.
+        </div>
+
+        <a class="cta-btn" href="/">← Back to the Predictor</a>
+    </div>
+
+    <p class="author">Developed by <span>Mohammed Awez</span></p>
+  </div>
+</body>
+</html>
