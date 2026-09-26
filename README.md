@@ -649,7 +649,7 @@ Possible improvements include:
 
 # 🚀 Links
 
-🌐 Try the Heart Disease Prediction Application:
+Try the Heart Disease Prediction Application:
 Live Application – https://heart-disease-prediction-x5b5.onrender.com/
 
 Get in touch
