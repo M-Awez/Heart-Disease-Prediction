@@ -5,12 +5,10 @@ A Machine Learning-based **Heart Disease Prediction System** that predicts the r
 The project implements a complete machine learning workflow including **data preprocessing, variable transformation, outlier handling, feature selection, class balancing using SMOTE, feature scaling, model training, evaluation, hyperparameter tuning, model serialization, and Flask-based prediction**.
 
 ---
-🚀 Live Demo
+# 🚀 Live Demo
 
 🌐 Try the Heart Disease Prediction Application:
-Live Application – Render
-
-Replace https://your-app-name.onrender.com with your actual Render deployment URL.
+Live Application – https://heart-disease-prediction-x5b5.onrender.com/
 
 ---
 
