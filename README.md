@@ -5,12 +5,6 @@ A Machine Learning-based **Heart Disease Prediction System** that predicts the r
 The project implements a complete machine learning workflow including **data preprocessing, variable transformation, outlier handling, feature selection, class balancing using SMOTE, feature scaling, model training, evaluation, hyperparameter tuning, model serialization, and Flask-based prediction**.
 
 ---
-# 🚀 Live Demo
-
-🌐 Try the Heart Disease Prediction Application:
-Live Application – https://heart-disease-prediction-x5b5.onrender.com/
-
----
 
 ## 📌 Project Overview
 
@@ -650,6 +644,16 @@ Possible improvements include:
 * Automated ML pipeline.
 * Additional evaluation metrics such as ROC-AUC and Precision-Recall AUC.
 * Integration of explainable AI techniques such as SHAP.
+
+---
+
+# 🚀 Links
+
+🌐 Try the Heart Disease Prediction Application:
+Live Application – https://heart-disease-prediction-x5b5.onrender.com/
+
+Get in touch
+Linkedin - https://www.linkedin.com/in/mohammed-awez-894006313/
 
 ---
 
